@@ -2919,18 +2919,18 @@ static ssize_t cameraflash_file_cmd_store(struct device *dev,
 
 	sscanf(buf, "%d", &value);
 
-        if (value != lastTorchState) {
-                lastTorchState = value;
-                if (value == 0)
-                        printk(KERN_INFO "[Factory flash]OFF\n");
-                else
-                        printk(KERN_INFO "[Factory flash]ON\n");
-                state->pdata->torch_onoff(value);
-        }
-        else
-                printk(KERN_INFO "[Factory flash]UNCHANGED\n");
+	if (value != lastTorchState) {
+		lastTorchState = value;
+		if (value == 0)
+			printk(KERN_INFO "[Factory flash]OFF\n");
+		else
+			printk(KERN_INFO "[Factory flash]ON\n");
+		state->pdata->torch_onoff(value);
+	}
+	else
+		printk(KERN_INFO "[Factory flash]UNCHANGED\n");
 
-        return size;
+	return size;
 }
 
 static DEVICE_ATTR(cameraflash, 0660, cameraflash_file_cmd_show, cameraflash_file_cmd_store);
